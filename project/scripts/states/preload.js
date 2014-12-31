@@ -1,26 +1,55 @@
 class Preload {
 
   constructor() {
-    this.loadingSprite = null;
+    this.asset = null;
+    this.ready = false;
   }
+
+  /**
+   * ########################################################################################
+   * State Methods ##########################################################################
+   * ########################################################################################
+  */
 
   preload() {
-    this.loadingSprite = this.add.sprite(320, 480, 'preloader');
-    this.loadingSprite.anchor.setTo(0.5, 0.5);
-
+    this.asset = this.add.sprite(this.game.width/2, this.game.height/2, 'preloader');
+    this.asset.anchor.setTo(0.5, 0.5);
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
-    this.load.setPreloadSprite(this.loadingSprite);
+    this.load.setPreloadSprite(this.asset);
+
+    this.loadImages();
   }
 
-  create() {}
+  create() {
+    this.asset.cropEnabled = false;
+  }
+
+
+  update() {
+    if(!!this.ready) {
+      this.game.state.start('game');
+    }
+  }
+
+
+  /**
+   * ########################################################################################
+   * Common Methods #########################################################################
+   * ########################################################################################
+  */
 
   onLoadComplete() {
-    this.game.state.start(
-      /* key        = */ 'menu',
-      /* clearWorld = */ true,
-      /* clearCache = */ false
-    );
+    this.ready = true;
   }
+
+
+  loadImages() {
+    this.load.image('starfield', 'assets/starfield.png');
+  }
+
+  loadAudios() {}
+  loadSpritesheets() {}
+  loadFonts() {}
 
 }
 
