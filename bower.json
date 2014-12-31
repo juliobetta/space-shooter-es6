@@ -1,0 +1,12 @@
+{
+  "name": "space-shooter",
+  "version": "0.0.1",
+  "description": "Simple space shooter game",
+  "authors": [
+    ""
+  ],
+  "dependencies": {
+    "phaser-official": "2.1.3",
+    "traceur-runtime": "latest"
+  }
+}
