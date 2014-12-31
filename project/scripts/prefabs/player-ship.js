@@ -1,3 +1,7 @@
+import BulletGroup  from 'prefabs/bullet-group';
+import SimpleCannon from 'prefabs/weapons/simple-cannon';
+import TripleCannon from 'prefabs/weapons/triple-cannon';
+
 var MAXSPEED     = 400,
     DRAG         = 400,
     ACCELARATION = 600;
@@ -10,12 +14,12 @@ class PlayerShip extends Phaser.Sprite {
     this.x = this.game.width / 2;
     this.y = this.game.height - this.height - 50;
 
-    this.health      = 100;
-    this.weaponLevel = 1;
-    this.bulletTimer = 0;
+    this.health = 100;
+    this.weapon = new SimpleCannon(this.game);
 
     this.anchor.setTo(0.5, 0.5);
 
+    // enable physics
     this.game.physics.arcade.enableBody(this);
     this.body.maxVelocity.setTo(MAXSPEED, MAXSPEED);
     this.body.drag.setTo(DRAG, DRAG);
@@ -23,6 +27,7 @@ class PlayerShip extends Phaser.Sprite {
     // create control keyboard control keys
     this.cursors    = this.game.input.keyboard.createCursorKeys();
     this.fireButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    this.leftButton = this.game.input.activePointer;
   }
 
 
@@ -30,8 +35,19 @@ class PlayerShip extends Phaser.Sprite {
     this.body.acceleration.x = 0;
     this.body.acceleration.y = 0;
 
-    this.moveWithMouse();
-    this.moveWithKeyboard();
+    if(!!this.alive) {
+      this.moveWithMouse();
+      this.moveWithKeyboard();
+      this.createBankEffect();
+
+      // Update weapon's position and FIRE!
+      if(this.leftButton.isDown || this.fireButton.isDown) {
+        this.weapon.loadWith(new BulletGroup(this.game))
+                   .updatePosition(this.x, this.y, this.angle)
+                   .updateBodyVelocity(this.body.velocity.x)
+                   .fire();
+      }
+    }
 
     this.stopAtScreenEdges();
   }
@@ -41,7 +57,6 @@ class PlayerShip extends Phaser.Sprite {
    * Move Ship with keyboard
    */
   moveWithKeyboard() {
-
     var move = function(direction, context) {
       var coordinate = 'x', acceleration = ACCELARATION;
 
@@ -65,7 +80,6 @@ class PlayerShip extends Phaser.Sprite {
    * Move with Mouse
    */
   moveWithMouse() {
-    // move mouse
     if((this.game.input.x < this.game.width  - 20 && this.game.input.x > 20) ||
        (this.game.input.y < this.game.height - 20 && this.game.input.y > 20))
     {
@@ -76,6 +90,16 @@ class PlayerShip extends Phaser.Sprite {
       this.body.velocity.x = MAXSPEED * this.game.math.clamp(distX / minDist, -1, 1);
       this.body.velocity.y = MAXSPEED * this.game.math.clamp(distY / minDist, -1, 1);
     }
+  }
+
+
+  /**
+   * Squish and rotate ship for illusion of "bank"
+   */
+  createBankEffect() {
+    var bank = this.body.velocity.x / MAXSPEED;
+    this.scale.x = 1 - Math.abs(bank) / 2;
+    this.angle = bank * 30;
   }
 
 
@@ -99,6 +123,7 @@ class PlayerShip extends Phaser.Sprite {
       }
     }, this);
   }
+
 }
 
 export default PlayerShip;
