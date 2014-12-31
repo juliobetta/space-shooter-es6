@@ -1,6 +1,10 @@
 # Space Shooter
 
-Simple space shooter game
+[Tutorial: Building a polished HTML5 space shooter game with Phaser.js](http://jschomay.tumblr.com/post/103568304133/tutorial-building-a-polished-html5-space-shooter)
+
+The code of this project is not the same as the tutorial. Instead, I'm using ecmascript6 via [Google's Traceur](https://github.com/google/traceur-compiler) and [Slush](http://slushjs.github.io), a scaffolding tool for javascript projects.
+
+Special thanks to [Jeff Schomay](http://jeffschomay.com/) who made available this awesome tutorial.
 
 ## Pre-requesits
 
@@ -21,8 +25,8 @@ This should open a browser window with the game running locally. You can copy th
 * media (folder for your assets source...)
 * gulp (gulp tasks folder)
 * project (contains scripts, stylesheets and index.html)
-* static/assets (image and sound files, use 'assets/file_name' in source code)
-    - graphic
+* static/assets
+    - images
     - music
     - sound
 
