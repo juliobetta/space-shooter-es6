@@ -44,8 +44,12 @@ class Preload {
 
 
   loadImages() {
-    this.load.image('starfield', 'assets/starfield.png');
+    var root = 'assets/images/';
+
+    this.load.image('starfield',  root + 'starfield.png');
+    this.load.image('playerShip', root + 'ship.png');
   }
+
 
   loadAudios() {}
   loadSpritesheets() {}
