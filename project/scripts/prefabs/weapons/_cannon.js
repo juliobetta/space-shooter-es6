@@ -6,6 +6,11 @@ class Cannon extends Weapon {
     super(game, x, y);
   }
 
+
+  /**
+   * Get canno's ammo
+   * @return {CannonBulletGroup}
+   */
   getAmmunition() {
     return new CannonBulletGroup(this.game);
   }

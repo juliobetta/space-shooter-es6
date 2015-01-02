@@ -15,6 +15,9 @@ class PlayerShip extends Phaser.Sprite {
 
     this.health = 100;
     this.weapon = new SimpleCannon(this.game);
+    this.trail  = this.createShipTrail();
+
+    this.trail.start(false, 5000, 10);
 
     this.anchor.setTo(0.5, 0.5);
 
@@ -37,6 +40,7 @@ class PlayerShip extends Phaser.Sprite {
     if(!!this.alive) {
       this.moveWithMouse();
       this.moveWithKeyboard();
+      this.stopAtScreenEdges();
       this.createBankEffect();
 
       // Update weapon's position and FIRE!
@@ -45,9 +49,11 @@ class PlayerShip extends Phaser.Sprite {
                    .updateBodyVelocity(this.body.velocity.x)
                    .fire();
       }
-    }
 
-    this.stopAtScreenEdges();
+      // update trail's position
+      this.trail.x = this.x;
+      this.trail.y = this.y;
+    }
   }
 
 
@@ -98,6 +104,24 @@ class PlayerShip extends Phaser.Sprite {
     var bank = this.body.velocity.x / MAXSPEED;
     this.scale.x = 1 - Math.abs(bank) / 2;
     this.angle = bank * 30;
+  }
+
+
+  /**
+   * Create ship trail
+   * @return {Emitter}
+   */
+  createShipTrail() {
+    var trail = this.game.add.emitter(this.x, this.y + 10, 400);
+    trail.width = 10;
+    trail.makeParticles('cannonBullet'); // reuse cannonBullet asset =)
+    trail.setXSpeed(30, -30);
+    trail.setYSpeed(200, 180);
+    trail.setRotation(50, -50);
+    trail.setAlpha(1, 0.01, 800);
+    trail.setScale(0.05, 0.4, 0.05, 0.4, 2000, Phaser.Easing.Quintic.Out);
+
+    return trail;
   }
 
 
