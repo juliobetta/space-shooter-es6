@@ -1,9 +1,9 @@
-import Weapon from 'prefabs/weapons/_weapon';
+import Cannon from 'prefabs/weapons/_cannon';
 
 /**
  * Fire three bullets at once
  */
-class TripleCannon extends Weapon {
+class TripleCannon extends Cannon {
 
   constructor(game, x, y) {
     super(game, x, y);
@@ -13,6 +13,8 @@ class TripleCannon extends Weapon {
 
   fire() {
     if(!this.isBulletAvailable()) { return; }
+
+    super.fire();
 
     var bullet, spreadAngle;
 

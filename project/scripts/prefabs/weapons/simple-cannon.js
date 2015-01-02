@@ -1,18 +1,19 @@
-import Weapon from 'prefabs/weapons/_weapon';
+import Cannon from 'prefabs/weapons/_cannon';
 
 /**
  * Fires a simple bullet
  */
-class SimpleCannon extends Weapon {
+class SimpleCannon extends Cannon {
 
   constructor(game, x, y) {
     super(game, x, y);
     this.bulletSpacing = 250;
   }
 
-
   fire() {
     if(!this.isBulletAvailable()) { return; }
+
+    super.fire();
 
     // Grab the first bullet we can from the pool and fire it
     var bullet = this.bullets.getFirstExists(false);

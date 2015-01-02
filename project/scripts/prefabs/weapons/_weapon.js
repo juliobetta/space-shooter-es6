@@ -30,6 +30,21 @@ class Weapon {
 
 
   /**
+   * Get weapon's ammunition
+   * @return {Group}
+   */
+  /* abstract */ getAmmunition() {}
+
+
+  /**
+   * Shoot!!!
+   */
+  /* abstract */ fire() {
+    this.bullets = this.getAmmunition();
+  }
+
+
+  /**
    * Update weapon's position
    * @param  {Float} x
    * @param  {Float} y
@@ -51,17 +66,6 @@ class Weapon {
    */
   updateBodyVelocity(value) {
     this.bodyVelocity = value;
-    return this;
-  }
-
-
-  /**
-   * Load with bullets
-   * @param {BulletGroup} bullets
-   * @return {Weapon}
-   */
-  loadWith(bullets) {
-    this.bullets = bullets;
     return this;
   }
 

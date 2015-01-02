@@ -46,9 +46,9 @@ class Preload {
   loadImages() {
     var root = 'assets/images/';
 
-    this.load.image('starfield',  root + 'starfield.png');
-    this.load.image('playerShip', root + 'ship.png');
-    this.load.image('bullet',     root + 'bullet.png');
+    this.load.image('starfield',    root + 'starfield.png');
+    this.load.image('playerShip',   root + 'ship.png');
+    this.load.image('cannonBullet', root + 'bullet.png');
   }
 
 

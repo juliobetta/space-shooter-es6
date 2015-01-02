@@ -1,4 +1,3 @@
-import BulletGroup  from 'prefabs/bullet-group';
 import SimpleCannon from 'prefabs/weapons/simple-cannon';
 import TripleCannon from 'prefabs/weapons/triple-cannon';
 
@@ -42,8 +41,7 @@ class PlayerShip extends Phaser.Sprite {
 
       // Update weapon's position and FIRE!
       if(this.leftButton.isDown || this.fireButton.isDown) {
-        this.weapon.loadWith(new BulletGroup(this.game))
-                   .updatePosition(this.x, this.y, this.angle)
+        this.weapon.updatePosition(this.x, this.y, this.angle)
                    .updateBodyVelocity(this.body.velocity.x)
                    .fire();
       }
