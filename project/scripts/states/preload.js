@@ -49,11 +49,13 @@ class Preload {
     this.load.image('starfield',    root + 'starfield.png');
     this.load.image('playerShip',   root + 'ship.png');
     this.load.image('cannonBullet', root + 'bullet.png');
+    this.load.image('greenEnemy',   root + 'enemy-green.png');
+
+    this.load.spritesheet('explosion', root + 'explode.png', 128, 128);
   }
 
 
   loadAudios() {}
-  loadSpritesheets() {}
   loadFonts() {}
 
 }

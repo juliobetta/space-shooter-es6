@@ -13,7 +13,8 @@ gulp.task('scripts', [ 'lint' ], function () {
         .pipe(sourcemaps.init())
         .pipe(traceur({
             modules: 'register',
-            moduleName: true
+            moduleName: true,
+            blockBinding: true
         }))
         .pipe(concat('game.js'))
         .pipe(sourcemaps.write())
