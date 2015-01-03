@@ -18,6 +18,7 @@ class Preload {
     this.load.setPreloadSprite(this.asset);
 
     this.loadImages();
+    this.loadSounds();
   }
 
   create() {
@@ -55,7 +56,14 @@ class Preload {
   }
 
 
-  loadAudios() {}
+  loadSounds() {
+    var root = 'assets/sounds/';
+
+    this.load.audio('cannonFire', root + 'piu.wav');
+    this.load.audio('explosion',  root + 'kaploft.wav');
+  }
+
+
   loadFonts() {}
 
 }

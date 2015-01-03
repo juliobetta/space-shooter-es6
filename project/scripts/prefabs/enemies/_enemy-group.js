@@ -1,12 +1,12 @@
 class EnemyGroup extends Phaser.Group {
   /**
-   * [constructor description]
+   * Constructor
    * @param  {Game} game
    * @param  {Number} totalPerTime=5 Total ship per cicle
    * @param  {Number} spacing=1000   Time in ms between ships
    * @param  {Group|Sprite|null} parent
    */
-  constructor(game, totalPerTime = 5, spacing = 1000, parent = null) {
+  constructor(game, totalPerTime = 5, spacing = 1000, parent) {
     super(game, parent);
 
     this.spacing         = spacing;

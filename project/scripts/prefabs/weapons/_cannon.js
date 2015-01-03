@@ -4,15 +4,13 @@ import CannonBulletGroup from 'prefabs/ammo/cannon-bullet-group';
 class Cannon extends Weapon {
   constructor(game, x, y) {
     super(game, x, y);
+    this.bullets    = new CannonBulletGroup(this.game);
+    this.cannonFire = this.game.add.audio('cannonFire');
   }
 
 
-  /**
-   * Get canno's ammo
-   * @return {CannonBulletGroup}
-   */
-  getAmmunition() {
-    return new CannonBulletGroup(this.game);
+  fire() {
+    this.cannonFire.play();
   }
 }
 

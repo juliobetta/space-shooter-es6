@@ -15,8 +15,6 @@ class GreenEnemy extends Enemy {
     this.anchor.setTo(0.5, 0.5);
     this.game.physics.arcade.enableBody(this);
 
-    this.body.setSize(this.width * 3/4, this.height * 3/4);
-
     this.events.onKilled.add(function() {
       this.trail.kill();
     }, this);

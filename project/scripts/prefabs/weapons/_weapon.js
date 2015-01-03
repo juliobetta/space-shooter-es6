@@ -29,20 +29,6 @@ class Weapon {
   }
 
 
-  /**
-   * Get weapon's ammunition
-   * @return {Group}
-   */
-  /* abstract */ getAmmunition() {}
-
-
-  /**
-   * Shoot!!!
-   */
-  /* abstract */ fire() {
-    this.bullets = this.getAmmunition();
-  }
-
 
   /**
    * Update weapon's position
