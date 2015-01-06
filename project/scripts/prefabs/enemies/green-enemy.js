@@ -5,15 +5,7 @@ class GreenEnemy extends Enemy {
     super(game, x, y, 'greenEnemy', frame);
 
     this.damageAmount = 20;
-    this.anchor.x     = 0.5;
-    this.anchor.y     = 0.5;
-    this.scale.x      = 0.5;
-    this.scale.y      = 0.5;
-    this.angle        = 180;
     this.trail        = this.createShipTrail();
-
-    this.anchor.setTo(0.5, 0.5);
-    this.game.physics.arcade.enableBody(this);
 
     this.events.onKilled.add(function() {
       this.trail.kill();
@@ -23,6 +15,8 @@ class GreenEnemy extends Enemy {
 
   update() {
     if(!this.exists) { return; }
+
+    super.update();
 
     this.angle = 180 - this.game.math.radToDeg(
       Math.atan2(this.body.velocity.x, this.body.velocity.y)

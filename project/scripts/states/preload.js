@@ -47,10 +47,12 @@ class Preload {
   loadImages() {
     var root = 'assets/images/';
 
-    this.load.image('starfield',    root + 'starfield.png');
-    this.load.image('playerShip',   root + 'ship.png');
-    this.load.image('cannonBullet', root + 'bullet.png');
-    this.load.image('greenEnemy',   root + 'enemy-green.png');
+    this.load.image('starfield',     root + 'starfield.png');
+    this.load.image('playerShip',    root + 'ship.png');
+    this.load.image('defaultPlasma', root + 'bullet.png');
+    this.load.image('colorPlasma',   root + 'enemy-blue-bullet.png');
+    this.load.image('greenEnemy',    root + 'enemy-green.png');
+    this.load.image('blueEnemy',     root + 'enemy-blue.png');
 
     this.load.spritesheet('explosion', root + 'explode.png', 128, 128);
   }
@@ -59,8 +61,8 @@ class Preload {
   loadSounds() {
     var root = 'assets/sounds/';
 
-    this.load.audio('cannonFire', root + 'piu.wav');
-    this.load.audio('explosion',  root + 'kaploft.wav');
+    this.load.audio('cannonFire', root + 'cannon.wav');
+    this.load.audio('explosion',  root + 'explosion.wav');
   }
 
 

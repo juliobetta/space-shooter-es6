@@ -8,8 +8,8 @@ class Boot {
     // max number of fingers to detect
     this.input.maxPointers = 1;
 
-    // auto pause if window looses focus
-    this.stage.disableVisibilityChange = true;
+    // auto pause if window is not focused
+    this.stage.disableVisibilityChange = false;
 
     if (this.game.device.desktop) {
       this.stage.scale.pageAlignHorizontally = true;

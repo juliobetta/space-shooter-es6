@@ -12,16 +12,18 @@ class Explosion extends Phaser.Group {
       explosion.animations.add('explosion');
     });
 
-    this.explosionSound = this.game.add.audio('explosion');
+    this.explosionSound = this.game.add.audio('explosion', 0.85);
   }
 
 
   /**
    * Play explosion
-   * @param  {Number} velocity
+   * @param  {Number} velocityY
+   * @param {Number} velocityX
    */
-  play(explosion, velocity = 0) {
-    explosion.body.velocity.y = velocity;
+  play(explosion, velocityY = 0, velocityX = 0) {
+    explosion.body.velocity.y = velocityY;
+    explosion.body.velocity.x = velocityX;
     explosion.alpha = 0.7;
     explosion.play('explosion', 30, false, true);
 

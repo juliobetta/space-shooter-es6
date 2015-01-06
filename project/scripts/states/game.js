@@ -1,5 +1,6 @@
 import Starfield  from 'prefabs/starfield';
 import PlayerShip from 'prefabs/player-ship';
+import BlueEnemyGroup from 'prefabs/enemies/blue-enemy-group';
 import GreenEnemyGroup from 'prefabs/enemies/green-enemy-group';
 import Explosion from 'prefabs/explosion';
 
@@ -18,28 +19,42 @@ class Game {
     this.starfield = new Starfield(this.game);
     this.game.add.existing(this.starfield);
 
-    this.explosions = new Explosion(this.game);
-
-    // add green enemies
-    this.greenEnemies = new GreenEnemyGroup(this.game);
-
     // add ship
     this.ship = new PlayerShip(this.game);
     this.game.add.existing(this.ship);
 
+    // add blue enemies
+    this.blueEnemies = new BlueEnemyGroup(this.game);
+    this.blueEnemies.lockTarget(this.ship);
+    this.blueEnemies.launch();
+
+    // add green enemies
+    this.greenEnemies = new GreenEnemyGroup(this.game);
+    this.greenEnemies.launch();
+
+    this.explosions = new Explosion(this.game);
   }
 
 
   update() {
-    // enable collision between the player and greenEnemies
-    this.game.physics.arcade.overlap(
-      this.ship, this.greenEnemies, this.onCollision, null, this
-    );
+    [this.greenEnemies, this.blueEnemies].forEach(function(enemies) {
+      // enable collision between the player and enemies
+      this.game.physics.arcade.overlap(
+        this.ship, enemies, this.onCollision, null, this
+      );
 
-    // enable collision between the player's ammo and greenEnemies
-    this.game.physics.arcade.overlap(
-      this.greenEnemies, this.ship.weapon.bullets, this.onHitEnemy, null, this
-    );
+      // enable collision between the player's ammo and enemies
+      this.game.physics.arcade.overlap(
+        enemies, this.ship.weapon.ammo, this.onHitEnemy, null, this
+      );
+    }, this);
+
+    this.blueEnemies.forEach(function(enemy) {
+      // enable collision between enemies' bullets and player's ship
+      this.game.physics.arcade.overlap(
+        enemy.weapon.ammo, this.ship, this.onHitPlayer, null, this
+      );
+    }, this);
   }
 
 
@@ -48,7 +63,7 @@ class Game {
     //   this.game.debug.body(bullet);
     // }, this);
 
-    // this.greenEnemies.forEach(function(enemy) {
+    // this.blueEnemies.forEach(function(enemy) {
     //   this.game.debug.body(enemy);
     // }, this);
   }
@@ -96,6 +111,25 @@ class Game {
 
     bullet.kill();
     enemy.kill();
+  }
+
+
+  /**
+   * On enemy fire hits player
+   * @param  {Ammo} bullet
+   */
+  onHitPlayer(ship, bullet) {
+    var explosion = this.explosions.getFirstExists(false);
+
+    explosion.reset(
+      ship.body.x + ship.body.halfWidth,
+      ship.body.y + ship.body.halfHeight
+    );
+
+    this.explosions.play(explosion, ship.body.velocity.y, ship.body.velocity.x);
+
+    // if(player.health > 0) explosion.play('explosion', 30, false, true);
+    bullet.kill();
   }
 }
 

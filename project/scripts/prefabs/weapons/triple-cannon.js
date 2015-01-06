@@ -6,7 +6,7 @@ import Cannon from 'prefabs/weapons/_cannon';
 class TripleCannon extends Cannon {
 
   constructor(game, x, y) {
-    super(game, x, y);
+    super(game, ammo, x, y);
     this.bulletSpacing = 550;
   }
 
@@ -19,7 +19,7 @@ class TripleCannon extends Cannon {
     var bullet, spreadAngle;
 
     for(var i = 0; i < 3; i++) {
-      bullet = this.bullets.getFirstExists(false);
+      bullet = this.ammo.getFirstExists(false);
 
       if(bullet) {
         this.resetBullet(bullet);

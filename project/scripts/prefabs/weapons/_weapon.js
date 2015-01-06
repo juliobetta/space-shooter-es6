@@ -8,15 +8,16 @@ class Weapon {
    * @param {Float} angle=0.0
    */
   constructor(game, x = 0.0, y = 0.0, angle = 0.0) {
-    this.game  = game;
-    this.x     = x;
-    this.y     = y;
-    this.angle = angle;
+    this.game   = game;
+    this.x      = x;
+    this.y      = y;
+    this.angle  = angle;
+    this.target = null;
 
     this.bodyVelocity = 0.0;
     this.bulletTimer  = 0;
     this.bulletSpeed  = 400;
-    this.bullets      = null;
+    this.ammo         = null;
   }
 
 
@@ -28,6 +29,14 @@ class Weapon {
     return this.game.time.now > this.bulletTimer;
   }
 
+
+  /**
+   * Set ammo
+   * @param {Ammo} ammo
+   */
+  setAmmo(ammo) {
+    this.ammo = ammo;
+  }
 
 
   /**

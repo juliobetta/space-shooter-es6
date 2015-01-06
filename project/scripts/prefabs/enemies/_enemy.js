@@ -4,14 +4,34 @@ class Enemy extends Phaser.Sprite {
 
     this.trail  = null;
     this.exists = false;
+    this.target = null;
+
+    this.anchor.setTo(0.5, 0.5);
+
+    this.anchor.x = 0.5;
+    this.anchor.y = 0.5;
+    this.scale.x  = 0.5;
+    this.scale.y  = 0.5;
+    this.angle    = 180;
+
+    this.game.physics.arcade.enableBody(this);
   }
 
+
+  update() {
+    // Kill enemies once they go off screen
+    if(this.y > this.game.height + 200) {
+      this.kill();
+    }
+  }
 
   /**
    * Launch ship
    */
   launch() {
-    this.exists = true;
+    this.totalAmmo = 1;
+    this.lastShot  = 0;
+    this.exists    = true;
   }
 }
 

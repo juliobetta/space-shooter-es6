@@ -114,7 +114,7 @@ class PlayerShip extends Phaser.Sprite {
   createShipTrail() {
     var trail = this.game.add.emitter(this.x, this.y + 10, 400);
     trail.width = 10;
-    trail.makeParticles('cannonBullet'); // reuse cannonBullet asset =)
+    trail.makeParticles('defaultPlasma'); // reuse defaultPlasma asset =)
     trail.setXSpeed(30, -30);
     trail.setYSpeed(200, 180);
     trail.setRotation(50, -50);
