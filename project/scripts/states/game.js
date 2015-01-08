@@ -1,8 +1,9 @@
-import Starfield  from 'prefabs/starfield';
-import PlayerShip from 'prefabs/player-ship';
-import BlueEnemyGroup from 'prefabs/enemies/blue-enemy-group';
+import Starfield       from 'prefabs/starfield';
+import PlayerShip      from 'prefabs/player-ship';
+import BlueEnemyGroup  from 'prefabs/enemies/blue-enemy-group';
 import GreenEnemyGroup from 'prefabs/enemies/green-enemy-group';
-import Explosion from 'prefabs/explosion';
+import Explosion       from 'prefabs/explosion';
+import HUD             from 'prefabs/hud';
 
 class Game {
 
@@ -13,6 +14,9 @@ class Game {
   */
 
   create() {
+    this.score           = 0;
+    this.scoreMultiplier = 10;
+
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // add starfield
@@ -33,6 +37,8 @@ class Game {
     this.greenEnemies.launch();
 
     this.explosions = new Explosion(this.game);
+
+    this.hud = new HUD(this.game);
   }
 
 
@@ -59,10 +65,6 @@ class Game {
 
 
   render() {
-    // this.ship.weapon.bullets.forEach(function(bullet) {
-    //   this.game.debug.body(bullet);
-    // }, this);
-
     // this.blueEnemies.forEach(function(enemy) {
     //   this.game.debug.body(enemy);
     // }, this);
@@ -81,25 +83,54 @@ class Game {
    * @param  {Enemy} enemy
    */
   onCollision(ship, enemy) {
-    var explosion = this.explosions.getFirstExists(false);
-
-    explosion.reset(
-      enemy.body.x + enemy.body.halfWidth,
-      enemy.body.y + enemy.body.halfHeight
-    );
-
-    this.explosions.play(explosion, enemy.body.velocity.y);
-
+    this.addDamageToPlayerShip(enemy.damageAmount, enemy);
     enemy.kill();
   }
 
 
+
+
   /**
-   * On player's bullet hit enemies
+   * On enemy fire hits player
    * @param  {Ammo} bullet
-   * @param  {Enemy} enemy
    */
-  onHitEnemy(bullet, enemy) {
+  onHitPlayer(ship, bullet) {
+    this.addDamageToPlayerShip(bullet.damageAmount);
+    bullet.kill();
+  }
+
+
+  /**
+   * Add damage to player's ship
+   * @param {Number} damageAmount
+   * @param {Enemy} enemy
+   */
+  addDamageToPlayerShip(damageAmount, enemy = null) {
+    this.ship.damage(damageAmount);
+    this.hud.updateHealth(this.ship.health);
+
+    if(this.ship.health > 0) { // player is still alive =)
+      var explosion = this.explosions.getFirstExists(false),
+          object    = enemy || this.ship;
+
+      explosion.reset(
+        object.body.x + object.body.halfWidth,
+        object.body.y + object.body.halfHeight
+      );
+
+      this.explosions.play(explosion, object.body.velocity.y);
+    } else { // player is dead =(
+      this.explosions.playBigExplosion(this.ship.x, this.ship.y);
+    }
+  }
+
+
+  /**
+   * On player's bullet hit enemies. "DIE MOTHAFUCKA, DIE!"
+   * @param  {Enemy} enemy
+   * @param  {Ammo} bullet
+   */
+  onHitEnemy(enemy, bullet) {
     var explosion = this.explosions.getFirstExists(false);
 
     explosion.reset(
@@ -109,27 +140,12 @@ class Game {
 
     this.explosions.play(explosion, -enemy.body.velocity.y);
 
+    // update score
+    this.score += (bullet.damageAmount + enemy.scorePoints) * this.scoreMultiplier;
+    this.hud.updateScore(this.score);
+
     bullet.kill();
     enemy.kill();
-  }
-
-
-  /**
-   * On enemy fire hits player
-   * @param  {Ammo} bullet
-   */
-  onHitPlayer(ship, bullet) {
-    var explosion = this.explosions.getFirstExists(false);
-
-    explosion.reset(
-      ship.body.x + ship.body.halfWidth,
-      ship.body.y + ship.body.halfHeight
-    );
-
-    this.explosions.play(explosion, ship.body.velocity.y, ship.body.velocity.x);
-
-    // if(player.health > 0) explosion.play('explosion', 30, false, true);
-    bullet.kill();
   }
 }
 

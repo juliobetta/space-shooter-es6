@@ -11,6 +11,9 @@ class GreenEnemyGroup extends EnemyGroup {
     );
 
     this.spacing = 1000;
+
+    this.setAll('damageAmount', 20);
+    this.setAll('scorePoints', 10);
   }
 
   /**

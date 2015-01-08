@@ -8,11 +8,13 @@ class Enemy extends Phaser.Sprite {
 
     this.anchor.setTo(0.5, 0.5);
 
-    this.anchor.x = 0.5;
-    this.anchor.y = 0.5;
-    this.scale.x  = 0.5;
-    this.scale.y  = 0.5;
-    this.angle    = 180;
+    this.anchor.x     = 0.5;
+    this.anchor.y     = 0.5;
+    this.scale.x      = 0.5;
+    this.scale.y      = 0.5;
+    this.angle        = 180;
+    this.scorePoints  = 0;
+    this.damageAmount = 0;
 
     this.game.physics.arcade.enableBody(this);
   }
@@ -22,6 +24,9 @@ class Enemy extends Phaser.Sprite {
     // Kill enemies once they go off screen
     if(this.y > this.game.height + 200) {
       this.kill();
+      if(this.trail !== null) {
+        this.trail.on = false;
+      }
     }
   }
 

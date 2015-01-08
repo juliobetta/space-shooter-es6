@@ -53,6 +53,11 @@ class PlayerShip extends Phaser.Sprite {
       // update trail's position
       this.trail.x = this.x;
       this.trail.y = this.y;
+    } else {
+      if(this.trail) {
+        this.trail.on = false;
+        this.trail = null;
+      }
     }
   }
 

@@ -5,7 +5,7 @@ import Cannon from 'prefabs/weapons/_cannon';
  */
 class TripleCannon extends Cannon {
 
-  constructor(game, x, y) {
+  constructor(game, ammo, x, y) {
     super(game, ammo, x, y);
     this.bulletSpacing = 550;
   }

@@ -5,8 +5,11 @@ class DefaultPlasma extends Ammo {
   constructor(game, parent) {
     super(game, 30, 'defaultPlasma', parent);
 
-    this.setAll('damageAmount', 20);
     this.setAll('anchor.y', 1);
+
+    this.forEach(function(ammo) {
+      ammo.damageAmount = 20;
+    });
   }
 
 }

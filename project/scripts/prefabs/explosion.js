@@ -13,6 +13,7 @@ class Explosion extends Phaser.Group {
     });
 
     this.explosionSound = this.game.add.audio('explosion', 0.85);
+    this.bigExplosionSound = this.game.add.audio('bigExplosion');
   }
 
 
@@ -28,6 +29,28 @@ class Explosion extends Phaser.Group {
     explosion.play('explosion', 30, false, true);
 
     this.explosionSound.play();
+  }
+
+
+  /**
+   * Play bigger explosion
+   * @param {Number} x
+   * @param {Number} y
+   */
+  playBigExplosion(x, y) {
+    var emitter = this.game.add.emitter(x, y);
+
+    emitter.width  = 50;
+    emitter.height = 50;
+    emitter.x      = x;
+    emitter.y      = y;
+
+    emitter.makeParticles('explosion', [0,1,2,3,4,5,6,7], 10);
+    emitter.setAlpha(0.9, 0, 800);
+    emitter.setScale(0.1, 0.6, 0.1, 0.6, 500, Phaser.Easing.Quintic.OUT);
+    emitter.start(false, 1000, 10, 10);
+
+    this.bigExplosionSound.play();
   }
 
 }

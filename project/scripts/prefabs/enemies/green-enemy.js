@@ -4,8 +4,7 @@ class GreenEnemy extends Enemy {
   constructor(game, x, y, frame) {
     super(game, x, y, 'greenEnemy', frame);
 
-    this.damageAmount = 20;
-    this.trail        = this.createShipTrail();
+    this.trail = this.createShipTrail();
 
     this.events.onKilled.add(function() {
       this.trail.kill();

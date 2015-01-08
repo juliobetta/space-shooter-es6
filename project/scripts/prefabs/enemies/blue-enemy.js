@@ -6,7 +6,6 @@ class BlueEnemy extends Enemy {
   constructor(game, x, y, frame) {
     super(game, x, y, 'blueEnemy', frame);
 
-    this.damageAmount = 40;
     this.frequency    = 70;
     this.spread       = 60;
     this.firingDelay  = 2000; // ms
@@ -53,11 +52,11 @@ class BlueEnemy extends Enemy {
     var bullet = this.weapon.ammo.getFirstExists(false),
         angle;
 
-    if(bullet
-        && this.alive
-        && this.totalAmmo
-        && this.y > this.game.width / 8
-        && this.game.time.now > this.firingDelay + this.lastShot
+    if(bullet &&
+        this.alive &&
+        this.totalAmmo &&
+        this.y > this.game.width / 8 &&
+        this.game.time.now > this.firingDelay + this.lastShot
     ) {
       this.lastShot = this.game.time.now;
       this.totalAmmo--;

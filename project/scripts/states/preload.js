@@ -61,8 +61,9 @@ class Preload {
   loadSounds() {
     var root = 'assets/sounds/';
 
-    this.load.audio('cannonFire', root + 'cannon.wav');
-    this.load.audio('explosion',  root + 'explosion.wav');
+    this.load.audio('cannonFire',   root + 'cannon.wav');
+    this.load.audio('explosion',    root + 'explosion.wav');
+    this.load.audio('bigExplosion', root + 'big-explosion.wav');
   }
 
 

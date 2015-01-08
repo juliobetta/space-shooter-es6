@@ -1,13 +1,16 @@
+import DefaultPlasma from 'prefabs/ammo/default-plasma';
+
 class Weapon {
 
   /**
    * Constructor
    * @param {Game} game
+   * @param {Ammo} ammo
    * @param {Float} x=0.0
    * @param {Float} y=0.0
    * @param {Float} angle=0.0
    */
-  constructor(game, x = 0.0, y = 0.0, angle = 0.0) {
+  constructor(game, ammo, x = 0.0, y = 0.0, angle = 0.0) {
     this.game   = game;
     this.x      = x;
     this.y      = y;
@@ -17,7 +20,7 @@ class Weapon {
     this.bodyVelocity = 0.0;
     this.bulletTimer  = 0;
     this.bulletSpeed  = 400;
-    this.ammo         = null;
+    this.ammo         = ammo || new DefaultPlasma(this.game);
   }
 
 

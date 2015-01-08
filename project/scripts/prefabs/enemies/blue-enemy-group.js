@@ -13,6 +13,9 @@ class BlueEnemyGroup extends EnemyGroup {
     this.totalInWave      = 5;
     this.verticalSpacing  = 70;
     this.timeBetweenWaves = 5000; // ms
+
+    this.setAll('damageAmount', 40);
+    this.setAll('scorePoints', 20);
   }
 
   /**

@@ -7,8 +7,9 @@ class ColorPlasma extends Ammo {
 
     this.callAll('crop', null, { x: 90, y: 0, width: 90, height: 70 });
     this.setAll('alpha', 0.9);
-    this.setAll('damageAmount', 40);
+
     this.forEach(function(ammo) {
+      ammo.damageAmount = 40;
       ammo.body.setSize(20, 20);
     });
   }

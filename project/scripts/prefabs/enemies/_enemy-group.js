@@ -16,6 +16,8 @@ class EnemyGroup extends Phaser.Group {
     for(let i = 0; i < this.totalPerTime; i++) {
       this.add(this.createNewMember());
     }
+
+    this.setAll('scorePoints', 0);
   }
 
 

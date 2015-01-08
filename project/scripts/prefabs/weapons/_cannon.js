@@ -1,10 +1,8 @@
 import Weapon from 'prefabs/weapons/_weapon';
-import DefaultPlasma from 'prefabs/ammo/default-plasma';
 
 class Cannon extends Weapon {
   constructor(game, ammo, x, y) {
-    super(game, x, y);
-    this.ammo       = ammo || new DefaultPlasma(this.game);
+    super(game, ammo, x, y);
     this.cannonFire = this.game.add.audio('cannonFire');
   }
 
