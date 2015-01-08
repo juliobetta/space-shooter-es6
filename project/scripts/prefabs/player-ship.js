@@ -1,5 +1,4 @@
 import SimpleCannon from 'prefabs/weapons/simple-cannon';
-import TripleCannon from 'prefabs/weapons/triple-cannon';
 
 var MAXSPEED     = 400,
     DRAG         = 400,

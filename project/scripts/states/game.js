@@ -4,6 +4,7 @@ import BlueEnemyGroup  from 'prefabs/enemies/blue-enemy-group';
 import GreenEnemyGroup from 'prefabs/enemies/green-enemy-group';
 import Explosion       from 'prefabs/explosion';
 import HUD             from 'prefabs/hud';
+import TripleCannon    from 'prefabs/weapons/triple-cannon';
 
 class Game {
 
@@ -30,7 +31,6 @@ class Game {
     // add blue enemies
     this.blueEnemies = new BlueEnemyGroup(this.game);
     this.blueEnemies.lockTarget(this.ship);
-    this.blueEnemies.launch();
 
     // add green enemies
     this.greenEnemies = new GreenEnemyGroup(this.game);
@@ -143,9 +143,25 @@ class Game {
     // update score
     this.score += (bullet.damageAmount + enemy.scorePoints) * this.scoreMultiplier;
     this.hud.updateScore(this.score);
+    this.onScoreIncreased();
 
     bullet.kill();
     enemy.kill();
+  }
+
+
+  /**
+   * Check score to make the game harder \n/_
+   */
+  onScoreIncreased() {
+    if(this.score > 1000) {
+      this.greenEnemies.spacing *= 0.2;
+    }
+
+    if(!this.blueEnemies.isLaunched && this.score > 5000) {
+      this.blueEnemies.launch();
+      this.ship.weapon = new TripleCannon(this.game);
+    }
   }
 }
 

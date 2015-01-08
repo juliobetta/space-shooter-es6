@@ -31,6 +31,8 @@ class BlueEnemyGroup extends EnemyGroup {
    * Launch enemy group
    */
   launch() {
+    super.launch();
+
     var startingX = this.game.rnd.integerInRange(100, this.game.width - 100),
         enemy;
 

@@ -11,6 +11,7 @@ class EnemyGroup extends Phaser.Group {
     this.totalPerTime    = totalPerTime;
     this.enableBody      = true;
     this.physicsBodyType = Phaser.Physics.ARCADE;
+    this.isLaunched      = false;
 
 
     for(let i = 0; i < this.totalPerTime; i++) {
@@ -18,6 +19,14 @@ class EnemyGroup extends Phaser.Group {
     }
 
     this.setAll('scorePoints', 0);
+  }
+
+
+  /**
+   * Launch group of enemies
+   */
+  launch() {
+    this.isLaunched = true;
   }
 
 

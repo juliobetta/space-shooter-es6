@@ -29,6 +29,8 @@ class GreenEnemyGroup extends EnemyGroup {
    * Launch enemy group
    */
   launch() {
+    super.launch();
+
     var enemy = this.getFirstExists(false);
 
     if(enemy) {
