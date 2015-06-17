@@ -7,15 +7,14 @@ var gulp       = require('gulp'),
 
 gulp.task('uglify', [ 'scripts' ], function () {
     return gulp.src([
-            './static/bower_components/traceur-runtime/traceur-runtime.js',
-            
-            './static/bower_components/phaser-official/build/custom/phaser-arcade-physics.js',
-            
-            './.tmp/game.js'
+          './bower_components/almond/almond.js',
+          './bower_components/phaser-official/build/custom/phaser-arcade-physics.js',
+          './node_modules/babel-core/browser-polyfill.js',
+          './.tmp/assets/js/game.js'
         ])
         .pipe(sourcemaps.init())
         .pipe(concat('game.min.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(paths['product']));
+        .pipe(gulp.dest(paths['product'] + '/assets/js'));
 });

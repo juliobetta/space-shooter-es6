@@ -6,7 +6,7 @@ gulp.task('server', function () {
     browserSync({
         server: {
             baseDir: [
-                paths['static'],
+                '',
                 paths['temp']
             ]
         }

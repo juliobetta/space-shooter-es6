@@ -36,7 +36,7 @@ class BlueEnemyGroup extends EnemyGroup {
     var startingX = this.game.rnd.integerInRange(100, this.game.width - 100),
         enemy;
 
-    for(let i = 0; i < this.totalInWave; i++) {
+    for(var i = 0; i < this.totalInWave; i++) {
       enemy = this.getFirstExists(false);
 
       if(enemy) {

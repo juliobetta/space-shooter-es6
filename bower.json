@@ -7,6 +7,6 @@
   ],
   "dependencies": {
     "phaser-official": "2.1.3",
-    "traceur-runtime": "latest"
+    "almond": "~0.3.0"
   }
 }

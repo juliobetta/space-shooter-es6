@@ -14,7 +14,7 @@ class EnemyGroup extends Phaser.Group {
     this.isLaunched      = false;
 
 
-    for(let i = 0; i < this.totalPerTime; i++) {
+    for(var i = 0; i < this.totalPerTime; i++) {
       this.add(this.createNewMember());
     }
 

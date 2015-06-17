@@ -36,22 +36,22 @@
   <title>Space Shooter</title>
 
   <!-- build:css style.min.css -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <!-- /build -->
 </head>
 <body>
   <section id="game-container"></section>
 
   <!-- build:js game.min.js -->
-  <script src="bower_components/traceur-runtime/traceur-runtime.js"></script>
+    <script src="bower_components/almond/almond.js"></script>
+    <script src="node_modules/babel-core/browser-polyfill.js"></script>
+    <script src="bower_components/phaser-official/build/custom/phaser-arcade-physics.js"></script>
 
-  <script src="bower_components/phaser-official/build/custom/phaser-arcade-physics.js"></script>
-
-  <script src="game.js"></script>
+    <script src="assets/js/game.js"></script>
   <!-- /build -->
 
   <script>
-    window.game = System.get('main')['default'].start();
+    window.game = require('main').start();
   </script>
 </body>
 </html>

@@ -5,7 +5,7 @@ var gulp         = require('gulp'),
 
 
 gulp.task('processHtml', function () {
-    return gulp.src(paths['develop'] + '/index.html')
+    return gulp.src(paths['src'] + '/index.html')
         .pipe(handleErrors())
         .pipe(processhtml('index.html'))
         .pipe(gulp.dest(paths['product']));

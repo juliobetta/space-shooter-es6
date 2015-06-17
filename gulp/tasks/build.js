@@ -3,10 +3,10 @@ var gulp        = require('gulp'),
 
 
 gulp.task('build', function (done) {
-    runSequence('clean', [
+    runSequence('clean',
         'processHtml',
         'minifyCss',
         'uglify',
         'processAssets'
-    ], done);
+    , done);
 });

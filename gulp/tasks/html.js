@@ -3,6 +3,6 @@ var gulp        = require('gulp'),
 
 
 gulp.task('html', function () {
-    return gulp.src(paths['develop'] + '/index.html')
+    return gulp.src(paths['src'] + '/index.html')
         .pipe(gulp.dest(paths['temp']));
 });

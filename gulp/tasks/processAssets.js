@@ -4,10 +4,8 @@ var gulp         = require('gulp'),
 
 gulp.task('processAssets', function () {
     gulp.src([
-        'static/**',
-        '!static/bower_components',     // Workaround to ensure both directory
-        '!static/bower_components/**'   // and its contents don't get copied.
+        './assets/**'
     ])
         .pipe(handleErrors())
-        .pipe(gulp.dest(paths['product']));
+        .pipe(gulp.dest(paths['product'] + '/assets'));
 });

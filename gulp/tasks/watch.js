@@ -17,6 +17,6 @@ gulp.task('watch', function () {
         .on('change', logChanges);
     gulp.watch(paths['less'], [ 'styles', browserSync.reload ])
         .on('change', logChanges);
-    gulp.watch(paths['develop'] + '/index.html', [ 'html', browserSync.reload ])
+    gulp.watch(paths['src'] + '/index.html', [ 'html', browserSync.reload ])
         .on('change', logChanges);
 });
